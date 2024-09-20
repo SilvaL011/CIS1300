@@ -1,0 +1,21 @@
+{
+	"folders": [
+		{
+			"name": "Desktop",
+			"path": ".."
+		},
+		{
+			"name": "DIY-Lab1",
+			"path": "../DIY-Lab1"
+		},
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"worksheet2.C": "cpp",
+			"worksheet2Money.C": "cpp"
+		}
+	}
+}
