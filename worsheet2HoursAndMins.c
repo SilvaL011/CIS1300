@@ -5,7 +5,8 @@ int main () {
     int numHours;
     int numMinutes;
 
-    scaf ("%d", &input);
+    printf ("Input an integer value: ");
+    scanf ("%d", &input);
 
     numHours = input / 60;
     numMinutes = input % 60;
