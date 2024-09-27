@@ -6,7 +6,7 @@ int main(){
     int flightMinutes;
     char dayPeriod;
 
-    printf("Would you like to inout your time slot using 12 or 24 hour time format? (Type 1 for 12 hour/Type 2 for 24 hour)\n");
+    printf("Would you like to input your time slot using 12 or 24 hour time format? (Type 1 for 12 hour/Type 2 for 24 hour)\n");
     scanf("%d", &timeFormatChoice);
 
     if(timeFormatChoice == 1){
@@ -17,7 +17,7 @@ int main(){
         scanf("%d", &flightMinutes);
 
         printf("%d:%d AM or PM?(Type 'p' for PM/Type 'a' for AM)\n", flightHour, flightMinutes);
-        scanf("%c", &dayPeriod);
+        scanf(" %c", &dayPeriod);
 
         if(dayPeriod == 'a'){
             printf("The picked time for your flight was %d:%dAM.\n", flightHour, flightMinutes);
