@@ -24,7 +24,7 @@ int main(){
         } else{
             printf("The picked time for your flight was %d:%dPM.\n", flightHour, flightMinutes);
         }
-    } else{
+    } else if(timeFormatChoice == 2){
         printf("What hour would be more appropriate for your flight?\n");
         scanf("%d", &flightHour);
 
@@ -32,5 +32,8 @@ int main(){
         scanf("%d", &flightMinutes);
 
         printf("The picked time for your flight was %d:%d.\n", flightHour, flightMinutes);
+    } else{
+        printf("Inproper input, type 1 or 2?\n");
+        main();
     }
 }
