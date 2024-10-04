@@ -7,7 +7,7 @@ int main(){
     char dayPeriod;
     int convertedFlightHour;
 
-    printf("Would you like to enter the time in 12-hour format (enter 1) or 24-hour format(enter 2)?");
+    printf("Would you like to enter the time in 12-hour format (enter 1) or 24-hour format(enter 2)? ");
     scanf("%d", &timeFormatChoice);
 
     if(timeFormatChoice == 1){
@@ -78,20 +78,40 @@ int main(){
             }
 
             if(convertedFlightHour < 10 && flightMinute < 10){
-            printf("In 24 hour format - you entered 0%d:0%d\n", convertedFlightHour, flightMinute);
-        } else if(convertedFlightHour < 10 && flightMinute >= 10){
-            printf("In 24 hour format - you entered 0%d:%d\n", convertedFlightHour, flightMinute);
-         } else if(convertedFlightHour >= 10 && flightMinute < 10){
-            printf("In 24 hour format - you entered %d:0%d\n", convertedFlightHour, flightMinute);
+                printf("In 24 hour format - you entered 0%d:0%d\n", convertedFlightHour, flightMinute);
+            } else if(convertedFlightHour < 10 && flightMinute >= 10){
+                printf("In 24 hour format - you entered 0%d:%d\n", convertedFlightHour, flightMinute);
+            } else if(convertedFlightHour >= 10 && flightMinute < 10){
+                printf("In 24 hour format - you entered %d:0%d\n", convertedFlightHour, flightMinute);
+            } else{
+                printf("In 24 hour format - you entered %d:%d\n", convertedFlightHour, flightMinute);
+            }
+    
         } else{
-            printf("In 24 hour format - you entered %d:%d\n", convertedFlightHour, flightMinute);
-        }
+             printf("---------------------------\n");
+            if(flightHour < 10 && flightMinute < 10){
+                printf("You entered 0%d:0%d am\n ", flightHour, flightMinute);
+            } else if(flightHour < 10 && flightMinute >= 10){
+                printf("You entered 0%d:%d am\n", flightHour, flightMinute);
+            } else if(flightHour >= 10 && flightMinute < 10){
+                printf("You entered %d:0%d am\n", flightHour, flightMinute);
+            } else{
+                printf("You entered %d:%d am\n", flightHour, flightMinute);
+            }
 
-            
+            if(flightHour < 10 && flightMinute < 10){
+                printf("In 24 hour format - you entered 0%d:0%d\n", flightHour, flightMinute);
+            } else if(flightHour < 10 && flightMinute >= 10){
+                printf("In 24 hour format - you entered 0%d:%d\n", flightHour, flightMinute);
+            } else if(flightHour >= 10 && flightMinute < 10){
+                printf("In 24 hour format - you entered %d:0%d\n", flightHour, flightMinute);
+            } else{
+                printf("In 24 hour format - you entered %d:%d\n", flightHour, flightMinute);
+            }
         }
     } else{
         printf("Enter time in 24 hour format\n");
-        printf("Enter a value between 0 and 24 for hour: ");
+        printf("Enter a value between 0 and 23 for hour: ");
         scanf("%d", &flightHour);
         printf("Enter a value between 0 and 60 for minutes: ");
         scanf("%d", &flightMinute);
@@ -140,29 +160,38 @@ int main(){
                 convertedFlightHour = 10;
                 break;
             case 23:
-                convertedFlightHour = 1;
+                convertedFlightHour = 11;
                 break;
             case 00:
                 convertedFlightHour = 12;
                 break;
+            default:
+                convertedFlightHour = flightHour;
+                break;
         }
 
-        if(convertedFlightHour < 10 && flightMinute < 10){
-            printf("In 12 hour format - you entered 0%d:0%d a.m.\n", convertedFlightHour, flightMinute);
-        } else if(convertedFlightHour < 10 && flightMinute >= 10){
-            printf("In 12 hour format - you entered 0%d:%d a.m.\n", convertedFlightHour, flightMinute);
-         } else if(convertedFlightHour >= 10 && flightMinute < 10){
-            if(flightHour >= 12){
-                printf("In 12 hour format - you entered %d:0%d p.m. \n", convertedFlightHour, flightMinute);
+        if(flightHour >= 12){ //afternoon print
+            if(flightHour < 10 && flightMinute < 10){
+                printf("In 12 hour format - you entered 0%d:0%d pm\n ", flightHour, flightMinute);
+            } else if(flightHour < 10 && flightMinute >= 10){
+                printf("In 12 hour format - you entered 0%d:%d pm\n", flightHour, flightMinute);
+            } else if(flightHour >= 10 && flightMinute < 10){
+                printf("In 12 hour format - you entered %d:0%d pm\n", flightHour, flightMinute);
             } else{
-                printf("In 12 hour format - you entered %d:0%d a.m.\n", convertedFlightHour, flightMinute);
+                printf("In 12 hour format - you entered %d:%d pm\n", flightHour, flightMinute);
             }
-        } else{
-            if(flightHour >= 12){
-                printf("In 12 hour format - you entered %d:%d p.m. \n", convertedFlightHour, flightMinute);
+        } else{ //morning print
+            if(flightHour < 10 && flightMinute < 10){
+                printf("In 12 hour format - you entered 0%d:0%d am\n ", flightHour, flightMinute);
+            } else if(flightHour < 10 && flightMinute >= 10){
+                printf("In 12 hour format - you entered 0%d:%d am\n", flightHour, flightMinute);
+            } else if(flightHour >= 10 && flightMinute < 10){
+                printf("In 12 hour format - you entered %d:0%d am\n", flightHour, flightMinute);
             } else{
-                printf("In 12 hour format - you entered %d:%d a.m.\n", convertedFlightHour, flightMinute);
+                printf("In 12 hour format - you entered %d:%d am\n", flightHour, flightMinute);
             }
         }
-    } 
+    }
+    printf("---------------------------\n");
+    return 0;
 }
