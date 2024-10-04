@@ -1,3 +1,29 @@
+/************************siqueiraSilvaLeandroA1.c**************
+Student Name: Leandro Siqueira Silva    Email Id: lsiqueir
+Due Date: 04/10/2024                    Course Name: CIS 1300
+I have exclusive control over this submission via my password.
+By including this statement in this header comment, I certify that:
+1) I have read and understood the University policy on academic
+integrity;
+2) I have completed the Computing with Integrity Tutorial on Moodle; and
+3) I have achieved at least 80% in the Computing with Integrity Self
+Test.
+I assert that this work is my own. I have appropriately acknowledged any
+and all material that I have used, whether directly quoted or
+paraphrased. Furthermore, I certify that this assignment was prepared by
+me specifically for this course.
+
+Compiling the program:
+    The program should be compiled using the following flags: -std=c99 -Wall
+
+compiling:
+    gcc siqueiraSilvaLeandroA1.c -std=c99 -Wall
+                        OR
+    gcc lastnameFirstnameA1.c -std=c99 -Wall -o assn1
+Running the Program:
+    Running: ./a.out
+********************************************************/
+
 #include <stdio.h>
 #include <stdbool.h>
 
@@ -8,7 +34,7 @@ int main(){
     char dayPeriod;
     int convertedFlightHour;
     int totalTimeInMin;
-    int flightDepartures[8] = {435, 495, 555, 615, 675, 915, 975, 1035};
+    int flightDepartures[8] = {435, 495, 555, 615, 675, 915, 975, 1035}; //Time of flights from table given were converted to total minutes
     int smallestDiff;
     int closestFlight;
     int hotelDecision;
@@ -29,11 +55,13 @@ int main(){
     float priceWithDiscounts;
     float priceWithTaxes;
 
-    printf("Would you like to enter the time in 12-hour format (enter 1) or 24-hour format(enter 2)? ");
-    
+    //Prompts the user to select between 12 and 24 format and stores choice in the variable timeFormatChoice
+    printf("Would you like to enter the time in 12-hour format (enter 1) or 24-hour format (enter 2)? ");
     scanf("%d", &timeFormatChoice);
 
+    //If the user picks 1, run code for 12 hour format; if user picks 2, run code for 24 hour format
     if(timeFormatChoice == 1){
+        //Asks user for time info of desired flight and stores the hour in flightHour, the minutes in flightMinute and period in dayPeriod
         printf("\n");
         printf("Enter time in 12 hour format\n");
         printf("\n");
@@ -47,10 +75,9 @@ int main(){
         printf("\n");
         printf("---------------------------\n");
 
-        
-        
+        //If user picks afternoon, run print statements formatted to p.m. times; if user picks morning, run print statements formatted to a.m. times
         if(dayPeriod == 'p'){
-
+            //Prints the selected afternoon time in 12 hour format
             if(flightHour < 10 && flightMinute < 10){
                 printf("You entered 0%d:0%d pm\n ", flightHour, flightMinute);
             } else if(flightHour < 10 && flightMinute >= 10){
@@ -61,6 +88,7 @@ int main(){
                 printf("You entered %d:%d pm\n", flightHour, flightMinute);
             }
 
+            //Converts the hour of the flight to 24 hour time
             switch (flightHour){
                 case 1:
                     convertedFlightHour = 13;
@@ -96,13 +124,14 @@ int main(){
                     convertedFlightHour = 23;
                     break;
                 case 12:
-                    convertedFlightHour = 0;
+                    convertedFlightHour = 12;
                     break;
                 default:
                     convertedFlightHour = flightHour;
                     break;
             }
 
+            //prints the time entered in 24 hour format
             if(convertedFlightHour < 10 && flightMinute < 10){
                 printf("In 24 hour format - you entered 0%d:0%d\n", convertedFlightHour, flightMinute);
             } else if(convertedFlightHour < 10 && flightMinute >= 10){
@@ -114,6 +143,7 @@ int main(){
             }
     
         } else{
+            //Prints the selected morning time in 12 hour format
             if(flightHour < 10 && flightMinute < 10){
                 printf("You entered 0%d:0%d am\n", flightHour, flightMinute);
             } else if(flightHour < 10 && flightMinute >= 10){
@@ -124,6 +154,7 @@ int main(){
                 printf("You entered %d:%d am\n", flightHour, flightMinute);
             }
 
+            //Prints the selected morning time in 24 hour format
             if(flightHour < 10 && flightMinute < 10){
                 printf("In 24 hour format - you entered 0%d:0%d\n", flightHour, flightMinute);
             } else if(flightHour < 10 && flightMinute >= 10){
@@ -135,8 +166,10 @@ int main(){
             }
         }
 
+        //Converts the time of flight from hours and minutes to only minutes
         totalTimeInMin = convertedFlightHour * 60 + flightMinute;
     } else{
+        //Asks user for time info of desired flight and stores the hour in flightHour, the minutes in flightMinute
         printf("\n");
         printf("Enter time in 24 hour format\n");
         printf("\n");
@@ -146,7 +179,7 @@ int main(){
         scanf("%d", &flightMinute);
         printf(" ---------------------------\n");
 
-
+        //Prints the selected time in 24 hour format
         if(flightHour < 10 && flightMinute < 10){
             printf("You entered 0%d:0%d\n", flightHour, flightMinute);
         } else if(flightHour < 10 && flightMinute >= 10){
@@ -157,6 +190,7 @@ int main(){
             printf("You entered %d:%d\n", flightHour, flightMinute);
         }
 
+        //Converts hour from 24 hour format to 12 hour format
         switch (flightHour){
             case 13:
                 convertedFlightHour = 1;
@@ -192,13 +226,14 @@ int main(){
                 convertedFlightHour = 11;
                 break;
             case 00:
-                convertedFlightHour = 12;
+                convertedFlightHour = 00;
                 break;
             default:
                 convertedFlightHour = flightHour;
                 break;
         }
 
+        //Prints the selected time in the correct formating, using pm and am when appropriate
         if(flightHour >= 12){ 
             if(flightHour < 10 && flightMinute < 10){
                 printf("In 12 hour format - you entered 0%d:0%d pm\n ", flightHour, flightMinute);
@@ -220,18 +255,21 @@ int main(){
                 printf("In 12 hour format - you entered %d:%d am\n", flightHour, flightMinute);
             }
         }
+        totalTimeInMin = flightHour * 60 + flightMinute;
     }
     printf("---------------------------\n");
 
-    totalTimeInMin = flightHour * 60 + flightMinute;
-
+    //initializes closestFlight to the first flight as default and initializes the samllestDiff variable, 
+    //which will be used to compare what flight has the smallest difference to the hour given
     closestFlight = flightDepartures[0];
     smallestDiff = totalTimeInMin - closestFlight;
 
+    //Gets the absolute value of the difference, in case it is negative
     if(smallestDiff < 0){
         smallestDiff = -smallestDiff;
     }
 
+    //Cycles through the array with flight times and picks out the flight with the smallest time difference 
     for(int i = 1; i < 8; i++){
         int difference = totalTimeInMin - flightDepartures[i];
 
@@ -244,6 +282,8 @@ int main(){
         }
     }
 
+    //prints the time of the closest time in 12 hour format and sets the cost of the flight, 
+    //price was given on table of assignment introduction
     switch(closestFlight){
         case 435:
             printf("Closest departure times is 7:15 a.m., arriving 8:25 a.m.\n");
@@ -280,23 +320,28 @@ int main(){
     }
     printf("\n");
 
+    //Asks if user needs a hotel in Montreal and stores decision in the variable hotelDecision
     printf("Would you like a hotel in Montreal - enter 0 for no; 1 for yes? ");
     scanf("%d", &hotelDecision);
 
+    //if the user does need a hotel, gives out info about hotels and asks what hotel choice the user wishes to book
+    //asks for how many days the user will stay in the hotel 
     if(hotelDecision == 1){
         printf("There are 3 hotels:\n");
         printf("1. Marriott: $248 per night\n");
         printf("2. Sheraton: $90 per night\n");
         printf("3. Double Tree: $128 per night\n");
         printf("\n");
-        printf("Your choice?: ");
+        printf("Your choice?:");
         scanf("%d", &hotelChoice);
         printf("How many days in Montreal?");
         scanf("%d", &daysInMontreal);
+        printf("\n");
         printf("Would you like a ride from airport to hotel? enter 0 for no; 1 for yes ");
         scanf("%d", &rideDecision);
     }
 
+    //Assigns the price of the hotel according to user choice, as well as ride
     switch(hotelChoice){
         case 1:
             hotelNightPrice = 248;
@@ -312,17 +357,20 @@ int main(){
             break;
     }
 
-    hotelCost = hotelNightPrice * daysInMontreal;
+    hotelCost = hotelNightPrice * daysInMontreal; //calculates the total cost of hotel stay by multiplying the days * price/night
 
+    //Asks user for date of birth and store it in birthday
     printf("\n");
     printf("Now enter your day of birth to qualify for discount2: ");
     scanf("%d", &birthday);
     printf("\n");
 
+    //Separates the two digits for birthday, then adds them up
     firstDigitOfBirthday = birthday / 10;
     secondDigitOfBirthday = birthday % 10;
     sumOfBirthdayDigits = firstDigitOfBirthday + secondDigitOfBirthday;
 
+    //displays the total cost as well as the breakdown of the cost(Cost of flight, cost of hotel and cost ofride to hotel)
     printf("Your total cost comes to: \n");
     printf("\n");
     printf("Cost of closest departure flight: $ %d.00 \n", flightCost);
@@ -330,11 +378,13 @@ int main(){
     printf("Cost of Ride: $ %d.00 \n", ridePrice);
     printf("\n");
 
-    totalPriceBfrTax = ridePrice + flightCost + hotelCost;
+    totalPriceBfrTax = ridePrice + flightCost + hotelCost; //calculates the total cost
 
+    //displays the total cost
     printf("Total cost before tax: $ %d.00 \n", totalPriceBfrTax);
     printf("\n");
     
+    //checks if discounts are applicable
     if(totalPriceBfrTax % 11 == 0){
         discount1 = true;
     }
@@ -342,8 +392,11 @@ int main(){
         discount2 = true;
     }
 
+    //stores the total price before taxes to price with discounts so changes can be made 
+    //on the price, without affecting the price without taxes
     priceWithDiscounts = totalPriceBfrTax;
 
+    //if discounts are applicable, apply them to total cost
     if(discount1 == true){
         printf("You get a 5%% discount because the total cost was a multiple of 11 :)\n");
         priceWithDiscounts = priceWithDiscounts * 0.95;
@@ -358,10 +411,14 @@ int main(){
     }
     printf("\n");
 
-    printf("Total cost after discounts 1 and 2: $ %.2f\n", priceWithDiscounts);
+    //Displays the total cost with discounts applied
+    printf("Total cost after discounts 1 and 2: $ %.2f\n", priceWithDiscounts); 
     printf("\n");
 
-    priceWithTaxes = priceWithDiscounts * 1.13;
+    //Applies taxes to total cost (13%)
+    priceWithTaxes = priceWithDiscounts * 1.13; 
 
+    //Displays total cost with taxes applied
     printf("Finally, your total cost after taxes: $ %.2f\n", priceWithTaxes);
+    return 0;
 }
