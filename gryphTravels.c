@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdbool.h>
 
 int main(){
     int timeFormatChoice;
@@ -10,12 +11,32 @@ int main(){
     int flightDepartures[8] = {435, 495, 555, 615, 675, 915, 975, 1035};
     int smallestDiff;
     int closestFlight;
+    int hotelDecision;
+    int hotelChoice;
+    int rideDecision;
+    int birthday;
+    bool discount1 = false;
+    bool discount2 = false;
+    int hotelCost = 0;
+    int flightCost;
+    int daysInMontreal = 0;
+    int hotelNightPrice;
+    int ridePrice = 0;
+    int totalPriceBfrTax;
+    int firstDigitOfBirthday;
+    int secondDigitOfBirthday;
+    int sumOfBirthdayDigits;
+    float priceWithDiscounts;
+    float priceWithTaxes;
 
     printf("Would you like to enter the time in 12-hour format (enter 1) or 24-hour format(enter 2)? ");
+    
     scanf("%d", &timeFormatChoice);
 
     if(timeFormatChoice == 1){
+        printf("\n");
         printf("Enter time in 12 hour format\n");
+        printf("\n");
         printf("Enter a value between 0 and 12 for hour: ");
         scanf("%d", &flightHour);
         printf("Enter a value between 0 and 60 for minutes: ");
@@ -116,7 +137,9 @@ int main(){
 
         totalTimeInMin = convertedFlightHour * 60 + flightMinute;
     } else{
+        printf("\n");
         printf("Enter time in 24 hour format\n");
+        printf("\n");
         printf("Enter a value between 0 and 23 for hour: ");
         scanf("%d", &flightHour);
         printf("Enter a value between 0 and 60 for minutes: ");
@@ -223,28 +246,122 @@ int main(){
 
     switch(closestFlight){
         case 435:
-            printf("Closest departure times is 7:15 a.m., arriving 8:25 a.m.");
+            printf("Closest departure times is 7:15 a.m., arriving 8:25 a.m.\n");
+            flightCost = 231;
             break;
         case 495:
-            printf("Closest departure times is 8:15 a.m., arriving 9:25 a.m.");
+            printf("Closest departure times is 8:15 a.m., arriving 9:25 a.m.\n");
+            flightCost = 226;
             break;
         case 555:
-            printf("Closest departure times is 9:15 a.m., arriving 10:25 a.m.");
+            printf("Closest departure times is 9:15 a.m., arriving 10:25 a.m.\n");
+            flightCost = 226;
             break;
         case 615:
-            printf("Closest departure times is 10:15 a.m., arriving 11:25 a.m.");
+            printf("Closest departure times is 10:15 a.m., arriving 11:25 a.m.\n");
+            flightCost = 283;
             break;
         case 675:
-            printf("Closest departure times is 11:15 a.m., arriving 12:25 a.m.");
+            printf("Closest departure times is 11:15 a.m., arriving 12:25 p.m.\n");
+            flightCost = 283;
             break;
         case 915:
-            printf("Closest departure times is 03:15 p.m., arriving 4:25 a.m.");
+            printf("Closest departure times is 03:15 p.m., arriving 4:25 p.m.\n");
+            flightCost = 226;
             break;
         case 975:
-            printf("Closest departure times is 04:15 p.m., arriving 5:25 a.m.");
+            printf("Closest departure times is 04:15 p.m., arriving 5:25 p.m.\n");
+            flightCost = 226;
             break;
         case 1035:
-            printf("Closest departure times is 05:15 p.m., arriving 6:25 p.m.");
+            printf("Closest departure times is 05:15 p.m., arriving 6:25 p.m.\n");
+            flightCost = 401;
             break;
     }
+    printf("\n");
+
+    printf("Would you like a hotel in Montreal - enter 0 for no; 1 for yes? ");
+    scanf("%d", &hotelDecision);
+
+    if(hotelDecision == 1){
+        printf("There are 3 hotels:\n");
+        printf("1. Marriott: $248 per night\n");
+        printf("2. Sheraton: $90 per night\n");
+        printf("3. Double Tree: $128 per night\n");
+        printf("\n");
+        printf("Your choice?: ");
+        scanf("%d", &hotelChoice);
+        printf("How many days in Montreal?");
+        scanf("%d", &daysInMontreal);
+        printf("Would you like a ride from airport to hotel? enter 0 for no; 1 for yes ");
+        scanf("%d", &rideDecision);
+    }
+
+    switch(hotelChoice){
+        case 1:
+            hotelNightPrice = 248;
+            ridePrice = 0;
+            break;
+        case 2:
+            hotelNightPrice = 90;
+            ridePrice = 25;
+            break;
+        case 3:
+            hotelNightPrice = 128;
+            ridePrice = 20;
+            break;
+    }
+
+    hotelCost = hotelNightPrice * daysInMontreal;
+
+    printf("\n");
+    printf("Now enter your day of birth to qualify for discount2: ");
+    scanf("%d", &birthday);
+    printf("\n");
+
+    firstDigitOfBirthday = birthday / 10;
+    secondDigitOfBirthday = birthday % 10;
+    sumOfBirthdayDigits = firstDigitOfBirthday + secondDigitOfBirthday;
+
+    printf("Your total cost comes to: \n");
+    printf("\n");
+    printf("Cost of closest departure flight: $ %d.00 \n", flightCost);
+    printf("Cost of Hotel for %d days: $ %d.00 \n", daysInMontreal, hotelCost);
+    printf("Cost of Ride: $ %d.00 \n", ridePrice);
+    printf("\n");
+
+    totalPriceBfrTax = ridePrice + flightCost + hotelCost;
+
+    printf("Total cost before tax: $ %d.00 \n", totalPriceBfrTax);
+    printf("\n");
+    
+    if(totalPriceBfrTax % 11 == 0){
+        discount1 = true;
+    }
+    if(totalPriceBfrTax % sumOfBirthdayDigits == 0){
+        discount2 = true;
+    }
+
+    priceWithDiscounts = totalPriceBfrTax;
+
+    if(discount1 == true){
+        printf("You get a 5%% discount because the total cost was a multiple of 11 :)\n");
+        priceWithDiscounts = priceWithDiscounts * 0.95;
+    } else{
+        printf("Sorry - you missed out on 5%% discount because the total cost was not a multiple of 11\n");
+    }
+    if(discount2 == true){
+        printf("You get an additional 5%% discount because the total cost after discount1 was a multiple of the sum of digits in your date of birth :)\n");
+        priceWithDiscounts = priceWithDiscounts * 0.95;
+    } else{
+        printf("Sorry - you missed out on the additional 5%% discount because the total after discount1 was not a multiple of the sum of digits in your day of birth\n");
+    }
+    printf("\n");
+
+    printf("Total cost after discounts 1 and 2: $ %.2f\n", priceWithDiscounts);
+    printf("\n");
+
+    priceWithTaxes = priceWithDiscounts * 1.13;
+
+    printf("Finally, your total cost after taxes: $ %.2f\n", priceWithTaxes);
 }
