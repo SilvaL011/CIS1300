@@ -6,6 +6,10 @@ int main(){
     int flightMinute;
     char dayPeriod;
     int convertedFlightHour;
+    int totalTimeInMin;
+    int flightDepartures[8] = {435, 495, 555, 615, 675, 915, 975, 1035};
+    int smallestDiff;
+    int closestFlight;
 
     printf("Would you like to enter the time in 12-hour format (enter 1) or 24-hour format(enter 2)? ");
     scanf("%d", &timeFormatChoice);
@@ -19,6 +23,7 @@ int main(){
         printf("Enter a for am or p for pm: ");
         scanf(" %c", &dayPeriod);
 
+        printf("\n");
         printf("---------------------------\n");
 
         
@@ -88,9 +93,8 @@ int main(){
             }
     
         } else{
-             printf("---------------------------\n");
             if(flightHour < 10 && flightMinute < 10){
-                printf("You entered 0%d:0%d am\n ", flightHour, flightMinute);
+                printf("You entered 0%d:0%d am\n", flightHour, flightMinute);
             } else if(flightHour < 10 && flightMinute >= 10){
                 printf("You entered 0%d:%d am\n", flightHour, flightMinute);
             } else if(flightHour >= 10 && flightMinute < 10){
@@ -109,6 +113,8 @@ int main(){
                 printf("In 24 hour format - you entered %d:%d\n", flightHour, flightMinute);
             }
         }
+
+        totalTimeInMin = convertedFlightHour * 60 + flightMinute;
     } else{
         printf("Enter time in 24 hour format\n");
         printf("Enter a value between 0 and 23 for hour: ");
@@ -170,7 +176,7 @@ int main(){
                 break;
         }
 
-        if(flightHour >= 12){ //afternoon print
+        if(flightHour >= 12){ 
             if(flightHour < 10 && flightMinute < 10){
                 printf("In 12 hour format - you entered 0%d:0%d pm\n ", flightHour, flightMinute);
             } else if(flightHour < 10 && flightMinute >= 10){
@@ -180,7 +186,7 @@ int main(){
             } else{
                 printf("In 12 hour format - you entered %d:%d pm\n", flightHour, flightMinute);
             }
-        } else{ //morning print
+        } else{ 
             if(flightHour < 10 && flightMinute < 10){
                 printf("In 12 hour format - you entered 0%d:0%d am\n ", flightHour, flightMinute);
             } else if(flightHour < 10 && flightMinute >= 10){
@@ -193,5 +199,52 @@ int main(){
         }
     }
     printf("---------------------------\n");
-    return 0;
+
+    totalTimeInMin = flightHour * 60 + flightMinute;
+
+    closestFlight = flightDepartures[0];
+    smallestDiff = totalTimeInMin - closestFlight;
+
+    if(smallestDiff < 0){
+        smallestDiff = -smallestDiff;
+    }
+
+    for(int i = 1; i < 8; i++){
+        int difference = totalTimeInMin - flightDepartures[i];
+
+        if(difference < 0){
+            difference = -difference;
+        }
+        if(difference < smallestDiff){
+            smallestDiff = difference;
+            closestFlight = flightDepartures[i];
+        }
+    }
+
+    switch(closestFlight){
+        case 435:
+            printf("Closest departure times is 7:15 a.m., arriving 8:25 a.m.");
+            break;
+        case 495:
+            printf("Closest departure times is 8:15 a.m., arriving 9:25 a.m.");
+            break;
+        case 555:
+            printf("Closest departure times is 9:15 a.m., arriving 10:25 a.m.");
+            break;
+        case 615:
+            printf("Closest departure times is 10:15 a.m., arriving 11:25 a.m.");
+            break;
+        case 675:
+            printf("Closest departure times is 11:15 a.m., arriving 12:25 a.m.");
+            break;
+        case 915:
+            printf("Closest departure times is 03:15 p.m., arriving 4:25 a.m.");
+            break;
+        case 975:
+            printf("Closest departure times is 04:15 p.m., arriving 5:25 a.m.");
+            break;
+        case 1035:
+            printf("Closest departure times is 05:15 p.m., arriving 6:25 p.m.");
+            break;
+    }
 }
