@@ -18,4 +18,3 @@ int countDig (int);
 void convertToBinary (int octet, int octetBinary [8]);
 void combineAllOctets (int octetBinary[8], int pos, int binaryAllOctets [32]);
 int convertBinaryToDecimal (int binaryAllOctets [32]);
-

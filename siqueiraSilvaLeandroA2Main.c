@@ -1,6 +1,10 @@
 #include "givenA2.h"
+#include <stdio.h>
+#include <string.h>
 
+char str[] = "";
 int main(){
-    void readIPAddress();
+
+    readIPAddress(str);
     return 0;
 }
